@@ -9,9 +9,8 @@ pwd=path.dirname(path.realpath(__file__))
 
 def handleIdent(fd):
 	fd.settimeout(1)
-	spoof=(pwd+'/spoofident.json','r')
 	try:
-		spoofFile=open(pwd+'/spoofident.json','r')
+		spoofFile=open(settings['spooffile'],'r')
 		spoof=load(spoofFile)
 		spoofFile.close()
 		data=fd.recv(1024).strip()

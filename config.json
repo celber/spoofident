@@ -2,6 +2,7 @@
 	"listeners": [
 		[ "::", 9113 ]
 	],
+	"spooffile": "/tmp/spooffile.json"
 	"setuid": 501,
 	"setgid": 501
 }
