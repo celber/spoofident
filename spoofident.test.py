@@ -4,11 +4,11 @@ from sys import argv
 targs=argv
 targs.pop(0)
 message=' '.join(targs)
-config=open('./spoofident.json','r')
+config=open('./config.json','r')
 settings=load(config)
 config.close()
 sock=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect(('127.0.0.1',113))
+sock.connect(('127.0.0.1',9113))
 print 'Sending '+message
 sock.send(message)
 print sock.recv(1024)

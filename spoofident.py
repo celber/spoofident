@@ -4,11 +4,18 @@ from json import load
 from time import time
 from select import select
 import socket
+
+pwd=path.dirname(path.realpath(__file__))
+
 def handleIdent(fd):
 	fd.settimeout(1)
 	try:
+		spoofFile=open(pwd+'/spoofident.json','r')
+		spoof=load(spoofFile)
+		spoofFile.close()
 		data=fd.recv(1024).strip()
-	except:
+	except Exception as e:
+		print e
 		fd.send('0,0:ERROR:UNKNOWN-ERROR\r\n') # TODO: catch exceptions which are actual errors, as opposed to no-data reports
 		return
 	ports=data.split(',',2)
@@ -16,7 +23,7 @@ def handleIdent(fd):
 	if len(ports)<2 or not all(ports):
 		fd.send('0,0:ERROR:INVALID-PORT\r\n')
 	else:
-		fd.send(','.join(map(str,ports))+':USERID:'+settings['os']+':'+settings['user']+'\r\n')
+		fd.send(','.join(map(str,ports))+':USERID:'+spoof['os']+':'+spoof['user']+'\r\n')
 	fd.close()
 def validPort(port):
 	try:
@@ -28,7 +35,7 @@ def validPort(port):
 	return False
 if __name__=='__main__':
 	pwd=path.dirname(path.realpath(__file__))
-	config=open(pwd+'/spoofident.json','r')
+	config=open(pwd+'/config.json','r')
 	settings=load(config)
 	config.close()
 	servers=[]
