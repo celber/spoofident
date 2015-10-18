@@ -6,6 +6,7 @@ from select import select
 import socket
 def handleIdent(fd):
 	fd.settimeout(1)
+	spoof=(pwd+'/spoofident.json','r')
 	try:
 		data=fd.recv(1024).strip()
 	except:
@@ -28,7 +29,7 @@ def validPort(port):
 	return False
 if __name__=='__main__':
 	pwd=path.dirname(path.realpath(__file__))
-	config=open(pwd+'/spoofident.json','r')
+	config=open(pwd+'/config.json','r')
 	settings=load(config)
 	config.close()
 	servers=[]
