@@ -9,6 +9,7 @@ pwd=path.dirname(path.realpath(__file__))
 
 def handleIdent(fd):
 	fd.settimeout(1)
+	spoof=(pwd+'/spoofident.json','r')
 	try:
 		spoofFile=open(pwd+'/spoofident.json','r')
 		spoof=load(spoofFile)
